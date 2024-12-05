@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { SiDjango, SiGithub, SiGoogle, SiMeta, SiTwitch } from "react-icons/si";
+import { SiDjango, SiGithub } from "react-icons/si";
 import { twMerge } from "tailwind-merge";
 import { FaPython, FaReact } from "react-icons/fa";
 import { BiLogoPostgresql } from "react-icons/bi";
@@ -36,8 +36,8 @@ export default function DivOrigami(){
 const DELAY_IN_MS = 2500;
 const TRANSITION_DURATION_IN_SECS = 1.5;
 
-const LogoRolodex = ({ items }) => {
-  const intervalRef = useRef(null);
+const LogoRolodex: React.FC<{items:React.ReactNode[]}> = ({ items }) => {
+  const intervalRef = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -110,13 +110,15 @@ const LogoRolodex = ({ items }) => {
     </div>
   );
 };
-
-const LogoItem = ({ children, className }) => {
+const LogoItem: React.FC<{ className: string; children: React.ReactNode }> = ({
+  children,
+  className,
+}) => {
   return (
     <div
       className={twMerge(
         "grid h-36 w-52 place-content-center rounded-lg bg-neutral-700 text-6xl text-neutral-50",
-        className
+        className // Combina las clases pasadas como prop
       )}
     >
       {children}

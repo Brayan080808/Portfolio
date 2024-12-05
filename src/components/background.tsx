@@ -1,8 +1,7 @@
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect } from "react";
-// import { FiArrowRight } from "react-icons/fi";
-import Portfolio from "./Portfolio.jsx"
+import { useEffect } from "react";
+import Portfolio from "./Portfolio.js"
 
 import {
   useMotionTemplate,
@@ -26,8 +25,6 @@ export default function AuroraHero(){
   }, []);
 
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
-  const border = useMotionTemplate`1px solid ${color}`;
-  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
 
   return (
     <motion.section

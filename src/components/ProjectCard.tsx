@@ -1,18 +1,38 @@
 import { ExternalLink, Github, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 
+
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  additionalImages: string[];
+  fullDescription:string;
+  category: string;
+  link: string; 
+  github: string; 
+  technologies: string[]; // Cambiado a un array de cadenas
+}
+
+interface ProjectCard{
+  project:Project;
+  setHoveredProject:(hover?:number)=>void,
+  setSelectedProject:(project?:Project)=>void,
+  setIsModalOpen:(state:boolean)=>void,
+  index:number,
+}
+
 export default function ProjectCard({
   project,
   setHoveredProject,
   setSelectedProject,
   setIsModalOpen,
   index,
-  children,
-}) {
+}:ProjectCard) {
   return (
     <motion.div
       onHoverStart={() => setHoveredProject(index)}
-      onHoverEnd={() => setHoveredProject(null)}
+      onHoverEnd={() => setHoveredProject()}
     >
       <div className="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden ">
         <div className="p-0 relative ">
@@ -51,7 +71,6 @@ export default function ProjectCard({
             </motion.div>
           </div>
 
-          {children}
 
           <div className="p-6">
             <h3 className="text-xl font-semibold mb-2">{project.title}</h3>

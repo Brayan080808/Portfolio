@@ -1,16 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
-  Code,
-  ExternalLink,
   Github,
   Linkedin,
-  Mail,
   Globe,
-  FileJson,
-  Server,
-  Layout,
-  Blocks,
   X,
   GraduationCap,
   Briefcase,
@@ -34,12 +27,9 @@ import gif3 from "/animacion3.gif";
 
 import imagen4 from "/Screenshot65.png";
 import imagen5 from "/Screenshot77.png";
-import imagen6 from "/Screenshot78.png";
 import imagen7 from "/Screenshot81.png";
 import imagen8 from "/Screenshot84.png";
-import imagen9 from "/Screenshot85.png";
 import imagen10 from "/Screenshot86.png";
-import imagen11 from "/Screenshot90.png";
 import imagen12 from "/Screenshot92.png";
 import imagen13 from "/Screenshot94.png";
 import imagen14 from "/Screenshot95.png";
@@ -47,7 +37,23 @@ import imagen15 from "/Screenshot96.png";
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 
-function TypewriterEffect({ words }) {
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  additionalImages: string[];
+  fullDescription:string;
+  category: string;
+  link: string; 
+  github: string; 
+  technologies: string[]; // Cambiado a un array de cadenas
+}
+
+interface AnimatedSectionProps{
+  children: ReactNode
+}
+
+const TypewriterEffect: React.FC<{ words: string[] }>  = ({ words }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -79,7 +85,7 @@ function TypewriterEffect({ words }) {
   return <span>{currentText}</span>;
 }
 
-function AnimatedSection({ children }) {
+const AnimatedSection:React.FC<AnimatedSectionProps> = ({ children }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -96,8 +102,9 @@ function AnimatedSection({ children }) {
 }
 
 export default function Component() {
-  const [hoveredProject, setHoveredProject] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+
+  const [, setHoveredProject] = useState<number>();
+  const [selectedProject, setSelectedProject] = useState<Project>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
@@ -313,7 +320,7 @@ export default function Component() {
         </AnimatedSection>
 
         {/* Projects Section */}
-        <AnimatedSection>
+        <AnimatedSection >
         <section id="projects" className="container mx-auto px-4 py-20">
           <h2 className="text-4xl font-bold mb-12 text-center">My Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -324,6 +331,7 @@ export default function Component() {
                 setSelectedProject={setSelectedProject}
                 setIsModalOpen={setIsModalOpen}
                 index={key}
+            
               />
             
             ))}
@@ -495,7 +503,7 @@ export default function Component() {
                 </div>
                 <div className="grid gap-4 mb-4">
                   <div className="grid grid-cols-3 gap-4">
-                    {selectedProject.additionalImages.map((img, i) => (
+                    {selectedProject?.additionalImages.map((img:string, i:number) => (
                       <img
                         key={i}
                         src={img}
