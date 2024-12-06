@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
-  Github,
-  Linkedin,
   Globe,
   X,
   GraduationCap,
@@ -16,9 +14,9 @@ import {
   SiTypescript,
   SiGit,
   SiTailwindcss,
-  SiWhatsapp
 } from "react-icons/si";
 
+import EmailForm from './EmailForm'
 
 import { Copyright } from "lucide-react";
 
@@ -404,62 +402,7 @@ export default function Component() {
 
         {/* Contact Section */}
         <AnimatedSection>
-          <section id="contact" className="container mx-auto px-4 py-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold mb-12 text-center">
-                Get In Touch
-              </h2>
-              <div className="grid lg:grid-cols-2 gap-12">
-                <div>
-                  <p className="text-gray-400 mb-6">
-                    I&apos;m currently looking for new opportunities. Whether
-                    you have a question or just want to say hi, I&apos;ll try my
-                    best to get back to you!
-                  </p>
-                  <div className="flex gap-4">
-                    <a
-                      href="https://github.com/Brayan080808"
-                      className="text-gray-400 hover:text-emerald-400"
-                    >
-                      <Github className="w-6 h-6" />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/bryan-ayala-acosta-862891238?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                      className="text-gray-400 hover:text-emerald-400"
-                    >
-                      <Linkedin className="w-6 h-6" />
-                    </a>
-                    <a
-                      href="https://wa.me/+5358683048"
-                      className="text-gray-400 hover:text-emerald-400"
-                    >
-                      <SiWhatsapp className="w-6 h-6" />
-                    </a>
-                  </div>
-                </div>
-                <form className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="w-full px-3 py-2 bg-gray-900 border border-gray-800 rounded-md text-white"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Subject"
-                    className="w-full px-3 py-2 bg-gray-900 border border-gray-800 rounded-md text-white"
-                  />
-                  <textarea
-                    placeholder="Your message"
-                    rows={4}
-                    className="w-full px-3 py-2 bg-gray-900 border border-gray-800 rounded-md text-white"
-                  ></textarea>
-                  <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded">
-                    Send Message
-                  </button>
-                </form>
-              </div>
-            </div>
-          </section>
+         <EmailForm/>
         </AnimatedSection>
       </main>
 
