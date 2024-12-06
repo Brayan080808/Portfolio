@@ -1,28 +1,11 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import {
-  Globe,
-  X,
-  GraduationCap,
-  Briefcase,
-} from "lucide-react";
-import {
-  SiReact,
-  SiDjango,
-  SiNestjs,
-  SiPostgresql,
-  SiTypescript,
-  SiGit,
-  SiTailwindcss,
-} from "react-icons/si";
-
+import {Globe,X,GraduationCap,Briefcase,} from "lucide-react";
+import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss} from "react-icons/si";
 import EmailForm from './EmailForm'
-
 import { Copyright } from "lucide-react";
-
 import imagen3 from "/internetPc.png";
 import gif3 from "/animacion3.gif";
-
 import imagen4 from "/Screenshot65.png";
 import imagen5 from "/Screenshot77.png";
 import imagen7 from "/Screenshot81.png";
@@ -192,8 +175,6 @@ export default function Component() {
     "Test-Driven Development",
   ];
 
-  // <AnimatedSection></AnimatedSection>
-
   return (
     <div className="min-h-screen bg-transparent text-white">
       <header className="sticky top-0 z-50 backdrop-blur-md ">
@@ -241,14 +222,16 @@ export default function Component() {
 
       <main>
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-20 flex items-center justify-between">
+        <section className="container  mx-auto px-4 py-4 sm:py-20 
+        sm:flex ite justify-between h-[60vh] sm:h-screen relative
+        ">
           <div className="max-w-2xl">
-            <h1 className="text-7xl font-bold mb-8 h-32">
+            <h1 className=" text-4xl   sm:text-7xl font-bold mb-8 h-32  ">
               <span className="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text">
                 Hello, I&apos;m
               </span>
               <br />
-              <span className="h-[1.2em] inline-block">
+              <span className="h-[1.2em]  inline-block">
                 <TypewriterEffect words={["Web Developer", "Bryan"]} />
               </span>
             </h1>
@@ -268,7 +251,8 @@ export default function Component() {
               </button>
             </div>
           </div>
-          <div className=" h-[470px] overflow-hidden">
+
+          <div className=" h-[470px] mb-24 absolute top-[-2rem] right-10 overflow-hidden">
             <img
               src={gif3}
               alt="Developer illustration"
@@ -277,6 +261,9 @@ export default function Component() {
               className="hidden lg:block object-fill"
             />
           </div>
+
+
+    
         </section>
 
         {/* About Section */}
@@ -324,14 +311,13 @@ export default function Component() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, key) => (
               <ProjectCard
+                key={key}
                 project={project}
                 setHoveredProject={setHoveredProject}
                 setSelectedProject={setSelectedProject}
                 setIsModalOpen={setIsModalOpen}
                 index={key}
-            
               />
-            
             ))}
           </div>
         </section>
@@ -430,9 +416,10 @@ export default function Component() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-gray-900 p-8 rounded-lg max-w-3xl w-full max-h-[90vh]  overflow-hidden cursor-default"
+              className="bg-gray-900 mx-4 p-5  sm:p-8 rounded-lg overflow-hidden cursor-default"
             >
-              <div className="bg-gray-900  rounded-lg max-w-3xl w-full max-h-[90vh] ">
+              {/* max-w-3xl w-full max-h-[90vh] */}
+              <div className="bg-gray-900 rounded-lg sm:w-full max-w-3xl max-h-[90vh]">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-2xl font-bold text-emerald-400">
                     {selectedProject.title}
@@ -444,16 +431,15 @@ export default function Component() {
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                <div className="grid gap-4 mb-4">
+                <div className="grid gap-4 mb-4 ">
                   <div className="grid grid-cols-3 gap-4">
                     {selectedProject?.additionalImages.map((img:string, i:number) => (
                       <img
                         key={i}
                         src={img}
                         alt={`${selectedProject.title} screenshot ${i + 1}`}
-                        width={200}
-                        height={150}
-                        className="w-auto h-36 object-fill rounded-md border border-gray-700"
+                       
+                        className="w-auto h-[5rem] sm:h-36 object-fill rounded-md border border-gray-700"
                       />
                     ))}
                   </div>
@@ -465,7 +451,7 @@ export default function Component() {
                       {selectedProject.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm"
+                          className=" px-2 sm:px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full  text-xs sm:text-sm"
                         >
                           {tech}
                         </span>
@@ -476,7 +462,7 @@ export default function Component() {
                     <h4 className="text-lg font-semibold mb-2 text-emerald-300">
                       Description
                     </h4>
-                    <p className="text-gray-300">
+                    <p className="text-gray-300 leading-5" >
                       {selectedProject.fullDescription}
                     </p>
                   </div>
