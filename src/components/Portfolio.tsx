@@ -226,7 +226,7 @@ export default function Component() {
         sm:flex ite justify-between h-[60vh] sm:h-screen relative
         ">
           <div className="max-w-2xl">
-            <h1 className=" text-4xl   sm:text-7xl font-bold mb-8 h-32  ">
+            <h1 className=" text-5xl  sm:text-7xl font-bold mb-8 h-32  ">
               <span className="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text">
                 Hello, I&apos;m
               </span>
