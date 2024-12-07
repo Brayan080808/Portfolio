@@ -50,15 +50,15 @@ export default function Navigation() {
   if (isMobile) {
     return (
       <>
-        {!isOpen && (
+         
                     <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="z-50 relative text-gray-300 hover:text-emerald-400 transition-colors"
+                    className={`z-50 relative text-gray-300 hover:text-emerald-400 transition-colors  `}
                     aria-label="Toggle menu"
                   >
                     <Menu className="h-6 w-6" />
                   </button>
-        )}
+        
 
         
         {/* Backdrop with starry background and increased blur */}
@@ -72,7 +72,7 @@ export default function Navigation() {
         {/* Aside menu */}
         <aside
           className={`fixed top-0 right-0 h-screen  w-[60vw]  bg-gray-900
-            transform transition-transform  duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)]
+            transform transition-transform  duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)] z-50
             border-l border-emerald-400/10
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
