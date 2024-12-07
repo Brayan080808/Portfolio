@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import {Globe,X,GraduationCap,Briefcase,} from "lucide-react";
+import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
 import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss} from "react-icons/si";
 import Navigation from "./header.tsx"
 import EmailForm from './EmailForm'

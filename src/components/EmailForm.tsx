@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Github,Linkedin,X,XCircle  } from 'lucide-react';
+import { Github,Linkedin } from 'lucide-react';
 import {SiWhatsapp} from 'react-icons/si'
 import Spiner from './Spiner'
+import SuccessNotification from './SuccessNotification'
+import ErrorNotification from './ErrorNotification'
 
 const EmailForm = () => {
     const [to, setTo] = useState<string>('');
@@ -40,7 +42,6 @@ const EmailForm = () => {
         })
     };
 
-    if(isSucess) console.log("El mensaje se envio!!!")
 
     return (
         <section id="contact" className="container mx-auto px-4 py-20">
@@ -116,19 +117,12 @@ const EmailForm = () => {
           </div>
         </div>
 
+        {isSucess && (
+          <SuccessNotification setIsSucess={setIsSucess} />
+        )}
+
         {isError && (
-          <div className="fixed top-0 left-0 right-0 flex items-center justify-center p-4 z-50">
-            <div className="bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center">
-              <XCircle size={24} className="mr-3" />
-              <span className="font-medium">Error al mandar el email. Por favor, inténtalo de nuevo.</span>
-              <button
-                onClick={() => setIsError(false)}
-                className="ml-4 text-white hover:text-red-200 focus:outline-none"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
+            <ErrorNotification setIsError={setIsError} />
         )}
 
       </section>
