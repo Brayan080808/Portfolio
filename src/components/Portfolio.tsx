@@ -177,8 +177,8 @@ export default function Component() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-white overflow-hidden">
-      <header className="sticky top-0 z-50 backdrop-blur-md  ">
+    <div className="min-h-screen  bg-transparent text-white overflow-x-clip relative">
+      <header className="sticky top-0 z-50 backdrop-blur-md ">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
             <a href="/" className="text-2xl font-bold flex items-center gap-2">
@@ -362,7 +362,7 @@ export default function Component() {
         </AnimatedSection>
       </main>
 
-      <footer className="border-t border-gray-800 bg-gray-900 overflow-hidden ">
+      <footer className="border-t border-gray-800 bg-gray-900 ">
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <a href="/" className="text-xl font-bold flex items-center gap-2">
             <Globe className="w-6 h-6 text-emerald-400" />

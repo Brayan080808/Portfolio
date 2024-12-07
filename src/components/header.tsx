@@ -62,8 +62,10 @@ export default function Navigation() {
 
         
         {/* Backdrop with starry background and increased blur */}
+
+
         <div
-          className={`fixed inset-0 h-screen backdrop-blur-xl bg-opacity-80 bg-[#0a0118] transition-opacity duration-300 
+          className={` fixed inset-0 h-screen backdrop-blur-xl bg-opacity-80 bg-[#0a0118] transition-opacity  duration-300  z-50
             ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
             `}
           onClick={() => setIsOpen(false)}
@@ -71,7 +73,7 @@ export default function Navigation() {
 
         {/* Aside menu */}
         <aside
-          className={`fixed top-0 right-0 h-screen  w-[60vw]  bg-gray-900
+          className={` fixed top-0 right-0 h-screen w-[60vw] bg-gray-900
             transform transition-transform  duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)] z-50
             border-l border-emerald-400/10
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -98,7 +100,7 @@ export default function Navigation() {
 
             {/* Menu footer */}
             <div className="mt-auto p-6 border-t border-emerald-400/10">
-              <div className="flex gap-4">
+              <div className="flex justify-center items-center gap-4">
                 <button className="flex-1 px-4 py-2 bg-emerald-400 text-gray-900 rounded-md hover:bg-emerald-500 transition-colors">
                   Hire Me
                 </button>
@@ -109,6 +111,8 @@ export default function Navigation() {
             </div>
           </div>
         </aside>
+
+
       </>
     )
   }
