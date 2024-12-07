@@ -78,8 +78,12 @@ export default function Navigation() {
             border-l border-emerald-400/10
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className="h-full flex flex-col">
+          <div className="h-full flex flex-col items-stretch justify-between">
             {/* Menu header */}
+
+            <div>
+
+     
             <div className="h-20 border-b border-emerald-400/10 flex items-center justify-between px-6">
               <div className="flex items-center gap-2">
                 <Globe className="w-6 h-6 text-emerald-400" />
@@ -97,9 +101,9 @@ export default function Navigation() {
             <nav className="flex flex-col space-y-6 px-6 py-8">
               <NavLinks />
             </nav>
-
+            </div>
             {/* Menu footer */}
-            <div className="mt-auto p-6 border-t border-emerald-400/10">
+            <div className="  p-6 border-t border-emerald-400/10">
               <div className="flex justify-center items-center gap-4">
                 <button className="flex-1 px-4 py-2 bg-emerald-400 text-gray-900 rounded-md hover:bg-emerald-500 transition-colors">
                   Hire Me
