@@ -100,7 +100,7 @@ export default function Component() {
       additionalImages: [`${imagen8}`, `${imagen10}`, `${imagen12}`],
       category: "web",
       link: "http://freshshopclient.onrender.com/",
-      github: "https://github.com/yourusername/ecommerce-platform",
+      github: "https://github.com/Brayan080808/FreshshopClient.git",
       technologies: [
         "React",
         "Node.js",
@@ -121,7 +121,7 @@ export default function Component() {
       additionalImages: [`${imagen5}`, `${imagen4}`, `${imagen7}`],
       category: "mobile",
       link: "#",
-      github: "https://github.com/yourusername/mobile-banking-app",
+      github: "#",
       technologies: [
         "Reactjs",
         "PostgreSQL",
@@ -140,7 +140,7 @@ export default function Component() {
       additionalImages: [`${imagen13}`, `${imagen14}`, `${imagen15}`],
       category: "web",
       link: "#",
-      github: "https://github.com/yourusername/portfolio-website",
+      github: "https://github.com/Brayan080808/Portfolio.git",
       technologies: ["React.js", "Tailwind CSS", "Sanity.io", "Framer Motion"],
     },
   ];
