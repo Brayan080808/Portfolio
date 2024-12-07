@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {Globe,X,GraduationCap,Briefcase,} from "lucide-react";
 import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss} from "react-icons/si";
+import Navigation from "./header.tsx"
+
 import EmailForm from './EmailForm'
 import { Copyright } from "lucide-react";
 import imagen3 from "/internetPc.png";
@@ -184,7 +186,8 @@ export default function Component() {
               <Globe className="w-8 h-8 text-emerald-400" />
               <span>Web Developer Portfolio</span>
             </a>
-            <div className="flex gap-6 items-center">
+            <Navigation />
+            {/* <div className="flex gap-6 items-center">
               <a
                 href="#about"
                 className="hover:text-emerald-400 transition-colors"
@@ -215,7 +218,7 @@ export default function Component() {
               >
                 Contact
               </a>
-            </div>
+            </div> */}
           </nav>
         </div>
       </header>
