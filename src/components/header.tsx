@@ -65,7 +65,7 @@ export default function Navigation() {
 
 
         <div
-          className={` fixed inset-0 h-screen backdrop-blur-xl bg-opacity-80 bg-[#0a0118] transition-opacity  duration-300  z-50
+          className={` fixed inset-0 h-screen backdrop-blur-xl bg-opacity-80 bg-[#0a0118] transition-opacity  duration-300   z-50
             ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
             `}
           onClick={() => setIsOpen(false)}
@@ -74,7 +74,7 @@ export default function Navigation() {
         {/* Aside menu */}
         <aside
           className={` fixed top-0 right-0 h-screen w-[60vw] bg-gray-900
-            transform transition-transform  duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)] z-50
+            transform transition-transform pb-8 duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)] z-50
             border-l border-emerald-400/10
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >

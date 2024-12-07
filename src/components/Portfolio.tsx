@@ -192,8 +192,8 @@ export default function Component() {
 
       <main>
         {/* Hero Section */}
-        <section className="container h-screen mx-auto px-4 py-4 sm:py-20 
-        sm:flex ite justify-between   relative
+        <section className="container h-[95vh] mx-auto px-4 py-4 sm:py-20 
+        sm:flex ite justify-between  relative
         ">
           <div className="max-w-2xl">
             <h1 className=" text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
