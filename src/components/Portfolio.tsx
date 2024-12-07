@@ -3,7 +3,6 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import {Globe,X,GraduationCap,Briefcase,} from "lucide-react";
 import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss} from "react-icons/si";
 import Navigation from "./header.tsx"
-
 import EmailForm from './EmailForm'
 import { Copyright } from "lucide-react";
 import imagen3 from "/internetPc.png";
@@ -178,8 +177,8 @@ export default function Component() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-white">
-      <header className="sticky top-0 z-50 backdrop-blur-md ">
+    <div className="min-h-screen bg-transparent text-white overflow-hidden">
+      <header className="sticky top-0 z-50 backdrop-blur-md overflow-hidden ">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
             <a href="/" className="text-2xl font-bold flex items-center gap-2">
@@ -187,38 +186,6 @@ export default function Component() {
               <span>Web Developer Portfolio</span>
             </a>
             <Navigation />
-            {/* <div className="flex gap-6 items-center">
-              <a
-                href="#about"
-                className="hover:text-emerald-400 transition-colors"
-              >
-                About
-              </a>
-              <a
-                href="#education"
-                className="hover:text-emerald-400 transition-colors"
-              >
-                Education
-              </a>
-              <a
-                href="#skills"
-                className="hover:text-emerald-400 transition-colors"
-              >
-                Skills
-              </a>
-              <a
-                href="#projects"
-                className="hover:text-emerald-400 transition-colors"
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                className="hover:text-emerald-400 transition-colors"
-              >
-                Contact
-              </a>
-            </div> */}
           </nav>
         </div>
       </header>
@@ -229,7 +196,7 @@ export default function Component() {
         sm:flex ite justify-between h-[60vh] sm:h-screen relative
         ">
           <div className="max-w-2xl">
-            <h1 className=" text-5xl  sm:text-7xl font-bold mb-8 h-32  ">
+            <h1 className=" text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
               <span className="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text">
                 Hello, I&apos;m
               </span>
@@ -395,7 +362,7 @@ export default function Component() {
         </AnimatedSection>
       </main>
 
-      <footer className="border-t border-gray-800 bg-gray-900">
+      <footer className="border-t border-gray-800 bg-gray-900 overflow-hidden ">
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <a href="/" className="text-xl font-bold flex items-center gap-2">
             <Globe className="w-6 h-6 text-emerald-400" />

@@ -71,7 +71,7 @@ export default function Navigation() {
 
         {/* Aside menu */}
         <aside
-          className={`fixed top-0 right-0 h-screen w-80  bg-gray-900
+          className={`fixed top-0 right-0 h-screen  w-[60vw]  bg-gray-900
             transform transition-transform  duration-200 ease-out shadow-[-4px_0_15px_rgba(0,0,0,0.3)]
             border-l border-emerald-400/10
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
