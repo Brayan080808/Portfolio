@@ -120,8 +120,8 @@ export default function Component() {
       image: `${imagen5}`,
       additionalImages: [`${imagen5}`, `${imagen4}`, `${imagen7}`],
       category: "mobile",
-      link: "#",
-      github: "#",
+      link: "https://financeflow.aam.cu/",
+      github: "https://github.com/Brayan080808/FinanceFlow",
       technologies: [
         "Reactjs",
         "PostgreSQL",
