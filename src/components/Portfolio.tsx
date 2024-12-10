@@ -18,6 +18,7 @@ import imagen14 from "/Screenshot95.png";
 import imagen15 from "/Screenshot96.png";
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
+import DownloadPDFButton from "./DownloadPDFButton.tsx";
 
 interface Project {
   title: string;
@@ -224,9 +225,7 @@ export default function Component() {
                   Hire Me
                 </a>
               </button>
-              <button className="border border-emerald-500 text-emerald-500 hover:bg-emerald-500/10 font-bold py-2 px-4 rounded">
-                Download CV
-              </button>
+              <DownloadPDFButton />
             </div>
           </div>
 
