@@ -89,6 +89,14 @@ export default function Component() {
   const [selectedProject, setSelectedProject] = useState<Project>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+  useEffect(() => {
+   
+        fetch('https://financeflowbackend.aam.cu/');
+        fetch('https://freshshop-dz9w.onrender.com/');
+  
+    },[]);
+
   const projects = [
     {
       title: "Freshshop",
