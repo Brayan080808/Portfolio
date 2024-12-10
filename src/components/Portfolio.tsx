@@ -200,8 +200,8 @@ export default function Component() {
 
       <main>
         {/* Hero Section */}
-        <section className="container h-[95vh] mx-auto px-4 py-4 sm:py-20 
-        sm:flex ite justify-between  relative
+        <section className=" flex justify-between sm:items-center container h-[88vh] mx-auto px-4 py-4 sm:py-20 
+        sm:flex ite  relative
         ">
           <div className="max-w-2xl">
             <h1 className=" text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
@@ -230,7 +230,7 @@ export default function Component() {
             </div>
           </div>
 
-          <div className=" h-[470px] mb-24 absolute top-[-2rem] right-10 overflow-hidden">
+          <div className=" h-[470px] mb-24 absolute right-10 overflow-hidden">
             <img
               src={gif3}
               alt="Developer illustration"
