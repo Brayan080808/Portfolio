@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Menu, X, Globe } from 'lucide-react'
+import DownloadPDFButton from './DownloadPDFButton'
 
 const navItems = [
   { href: "#about", label: "About" },
@@ -59,11 +60,6 @@ export default function Navigation() {
                     <Menu className="h-6 w-6" />
                   </button>
         
-
-        
-        {/* Backdrop with starry background and increased blur */}
-
-
         <div
           className={` fixed inset-0 h-screen backdrop-blur-xl bg-opacity-80 bg-[#0a0118] transition-opacity  duration-300   z-50
             ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
@@ -108,9 +104,7 @@ export default function Navigation() {
                 <button className="flex-1 px-4 py-2 bg-emerald-400 text-gray-900 rounded-md hover:bg-emerald-500 transition-colors">
                   Hire Me
                 </button>
-                <button className="flex-1 px-4 py-2 border border-emerald-400/20 text-emerald-400 rounded-md hover:bg-emerald-400/10 transition-colors">
-                  Download CV
-                </button>
+                <DownloadPDFButton/>
               </div>
             </div>
           </div>
