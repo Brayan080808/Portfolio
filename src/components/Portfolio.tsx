@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
-import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss} from "react-icons/si";
+import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss, SiAngular } from "react-icons/si";
 import Navigation from "./header.tsx"
 import EmailForm from './EmailForm'
 import { Copyright } from "lucide-react";
@@ -168,6 +168,7 @@ export default function Component() {
 
   const techIcons = [
     { name: "Django", icon: <SiDjango className="w-6 h-6" /> },
+    { name: "Angular", icon: <SiAngular className="w-6 h-6"/>},
     { name: "React.js", icon: <SiReact className="w-6 h-6" /> },
     { name: "Nest.js", icon: <SiNestjs className="w-6 h-6" /> },
     { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
