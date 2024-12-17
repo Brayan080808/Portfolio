@@ -121,8 +121,8 @@ export default function Component() {
       image: `${imagen8}`,
       additionalImages: [`${imagen8}`, `${imagen10}`, `${imagen12}`],
       category: "web",
-      link: "http://freshshopclient.onrender.com/",
-      github: "https://github.com/Brayan080808/FreshshopClient.git",
+      link: "https://freshshop-dfwn.onrender.com",
+      github: "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
       technologies: [
         "React",
         "Node.js",
