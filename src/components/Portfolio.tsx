@@ -272,7 +272,7 @@ export default function Component() {
               <p className="text-gray-400 mb-6">
                 I am a web developer with 2 years of experience developing all
                 kinds of projects, using technologies such as Django, NestJS,
-                PostgreSQL, Tailwind, and ReactJS, with a great passion for
+                PostgreSQL, Tailwind, Angular and ReactJS, with a great passion for
                 learning every day and achieving new goals.
               </p>
               <div className="space-y-4">
