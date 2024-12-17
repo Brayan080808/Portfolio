@@ -19,6 +19,8 @@ import imagen15 from "/Screenshot96.png";
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 import DownloadPDFButton from "./DownloadPDFButton.tsx";
+import emailjs from '@emailjs/browser';
+
 
 interface Project {
   title: string;
@@ -91,10 +93,21 @@ export default function Component() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+  
+
+
+
   useEffect(() => {
    
         fetch('https://financeflowbackend.aam.cu/');
         fetch('https://freshshop-dz9w.onrender.com/');
+
+      const templateParams = {
+          to_email: "",
+          subject: "New visitor",
+          message: "Someone has visited your portfolio",
+      };
+      emailjs.send('service_9qmfrib', 'template_bdfwlzd', templateParams, 'Hqsub6P4NuqvTjep2')
   
     },[]);
 

@@ -32,9 +32,8 @@ const EmailForm = () => {
           setMessage("")
           setIsSucess(true);
         })
-        .catch((error)=>{
-          console.log("Error")
-          console.log(error)
+        .catch(()=>{
+
           setIsError(true);
         })
         .finally(()=>{
