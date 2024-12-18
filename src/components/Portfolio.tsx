@@ -124,7 +124,7 @@ export default function Component() {
       link: "https://freshshop-dfwn.onrender.com",
       github: "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
       technologies: [
-        "Angular",
+        "React",
         "Node.js",
         "PostgreSQL",
         "Django",
@@ -144,7 +144,7 @@ export default function Component() {
       link: "https://financeflow.aam.cu/",
       github: "https://github.com/Brayan080808/FinanceFlow",
       technologies: [
-        "Angular",
+        "React",
         "PostgreSQL",
         "Tailwindcss",
         "Nestjs",
