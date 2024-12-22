@@ -294,25 +294,6 @@ export default function Component() {
         </section>
         </AnimatedSection>
 
-        {/* Projects Section */}
-        <AnimatedSection >
-        <section id="projects" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center">My Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, key) => (
-              <ProjectCard
-                key={key}
-                project={project}
-                setHoveredProject={setHoveredProject}
-                setSelectedProject={setSelectedProject}
-                setIsModalOpen={setIsModalOpen}
-                index={key}
-              />
-            ))}
-          </div>
-        </section>
-        </AnimatedSection>
-
         {/* Skills Section */}
         <AnimatedSection>
         <section id="skills" className="container mx-auto px-4 py-20">
@@ -375,6 +356,26 @@ export default function Component() {
             </div>
           </section>
         </AnimatedSection>
+
+                {/* Projects Section */}
+                <AnimatedSection >
+        <section id="projects" className="container mx-auto px-4 py-20">
+          <h2 className="text-4xl font-bold mb-12 text-center">My Projects</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, key) => (
+              <ProjectCard
+                key={key}
+                project={project}
+                setHoveredProject={setHoveredProject}
+                setSelectedProject={setSelectedProject}
+                setIsModalOpen={setIsModalOpen}
+                index={key}
+              />
+            ))}
+          </div>
+        </section>
+        </AnimatedSection>
+
 
         {/* Contact Section */}
         <AnimatedSection>
