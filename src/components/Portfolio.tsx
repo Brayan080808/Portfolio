@@ -1,44 +1,52 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
-import {SiReact,SiDjango,SiNestjs,SiPostgresql,SiTypescript,SiGit,SiTailwindcss, SiAngular } from "react-icons/si";
-import Navigation from "./header.tsx"
-import EmailForm from './EmailForm'
+import {
+  SiReact,
+  SiDjango,
+  SiNestjs,
+  SiPostgresql,
+  SiTypescript,
+  SiGit,
+  SiTailwindcss,
+  SiAngular,
+} from "react-icons/si";
+import Navigation from "./header.tsx";
+import EmailForm from "./EmailForm";
 import { Copyright } from "lucide-react";
-import imagen3 from "/internetPc.png";
+import imagen3 from "/internetPc.webp";
 import gif3 from "/animacion3.gif";
 import imagen4 from "/Screenshot65.png";
 import imagen5 from "/Screenshot77.png";
 import imagen7 from "/Screenshot81.png";
-import imagen8 from "/Screenshot84.png";
+import imagen8 from "/Screenshot84.webp";
 import imagen10 from "/Screenshot86.png";
 import imagen12 from "/Screenshot92.png";
-import imagen13 from "/Screenshot94.png";
+import imagen13 from "/Screenshot.webp";
 import imagen14 from "/Screenshot95.png";
 import imagen15 from "/Screenshot96.png";
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 import DownloadPDFButton from "./DownloadPDFButton.tsx";
-import emailjs from '@emailjs/browser';
-
+import emailjs from "@emailjs/browser";
 
 interface Project {
   title: string;
   description: string;
   image: string;
   additionalImages: string[];
-  fullDescription:string;
+  fullDescription: string;
   category: string;
-  link: string; 
-  github: string; 
+  link: string;
+  github: string;
   technologies: string[]; // Cambiado a un array de cadenas
 }
 
-interface AnimatedSectionProps{
-  children: ReactNode
+interface AnimatedSectionProps {
+  children: ReactNode;
 }
 
-const TypewriterEffect: React.FC<{ words: string[] }>  = ({ words }) => {
+const TypewriterEffect: React.FC<{ words: string[] }> = ({ words }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -68,9 +76,9 @@ const TypewriterEffect: React.FC<{ words: string[] }>  = ({ words }) => {
   }, [currentText, isDeleting, currentWordIndex, words]);
 
   return <span>{currentText}</span>;
-}
+};
 
-const AnimatedSection:React.FC<AnimatedSectionProps> = ({ children }) => {
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -84,32 +92,29 @@ const AnimatedSection:React.FC<AnimatedSectionProps> = ({ children }) => {
       {children}
     </motion.div>
   );
-}
+};
 
 export default function Component() {
-
   const [, setHoveredProject] = useState<number>();
   const [selectedProject, setSelectedProject] = useState<Project>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  
-
-
-
   useEffect(() => {
-   
-        fetch('https://financeflowbackend.aam.cu/');
-        fetch('https://freshshop-dz9w.onrender.com/');
+    fetch("https://financeflowbackend.aam.cu/");
+    fetch("https://freshshop-dz9w.onrender.com/");
 
-      const templateParams = {
-          to_email: "",
-          subject: "New visitor",
-          message: "Someone has visited your portfolio",
-      };
-      emailjs.send('service_9qmfrib', 'template_bdfwlzd', templateParams, 'Hqsub6P4NuqvTjep2')
-  
-    },[]);
+    const templateParams = {
+      to_email: "",
+      subject: "New visitor",
+      message: "Someone has visited your portfolio",
+    };
+    emailjs.send(
+      "service_9qmfrib",
+      "template_bdfwlzd",
+      templateParams,
+      "Hqsub6P4NuqvTjep2"
+    );
+  }, []);
 
   const projects = [
     {
@@ -122,7 +127,8 @@ export default function Component() {
       additionalImages: [`${imagen8}`, `${imagen10}`, `${imagen12}`],
       category: "web",
       link: "https://freshshop-dfwn.onrender.com",
-      github: "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
+      github:
+        "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
       technologies: [
         "React",
         "Node.js",
@@ -143,13 +149,7 @@ export default function Component() {
       category: "mobile",
       link: "https://financeflow.aam.cu/",
       github: "https://github.com/Brayan080808/FinanceFlow",
-      technologies: [
-        "React",
-        "PostgreSQL",
-        "Tailwindcss",
-        "Nestjs",
-        "Nodejs",
-      ],
+      technologies: ["React", "PostgreSQL", "Tailwindcss", "Nestjs", "Nodejs"],
     },
     {
       title: "Portfolio Website",
@@ -168,7 +168,7 @@ export default function Component() {
 
   const techIcons = [
     { name: "Django", icon: <SiDjango className="w-6 h-6" /> },
-    { name: "Angular", icon: <SiAngular className="w-6 h-6"/>},
+    { name: "Angular", icon: <SiAngular className="w-6 h-6" /> },
     { name: "React.js", icon: <SiReact className="w-6 h-6" /> },
     { name: "Nest.js", icon: <SiNestjs className="w-6 h-6" /> },
     { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
@@ -214,9 +214,11 @@ export default function Component() {
 
       <main>
         {/* Hero Section */}
-        <section className=" flex justify-between sm:items-center container h-[88vh] mx-auto px-4 py-4 sm:py-20 
+        <section
+          className=" flex justify-between sm:items-center container h-[88vh] mx-auto px-4 py-4 sm:py-20 
         sm:flex ite  relative
-        ">
+        "
+        >
           <div className="max-w-2xl">
             <h1 className=" text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
               <span className="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text">
@@ -234,9 +236,7 @@ export default function Component() {
             </div>
             <div className="flex gap-4">
               <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded">
-                <a href="#contact">
-                  Hire Me
-                </a>
+                <a href="#contact">Hire Me</a>
               </button>
               <DownloadPDFButton />
             </div>
@@ -251,67 +251,64 @@ export default function Component() {
               className="hidden lg:block object-fill"
             />
           </div>
-
-
-    
         </section>
 
         {/* About Section */}
         <AnimatedSection>
-        <section id="about" className="container mx-auto px-4 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <img
-              src={imagen3}
-              alt="Workspace"
-              width={800}
-              height={600}
-              className="rounded-lg"
-            />
-            <div>
-              <h2 className="text-4xl font-bold mb-6">About Me</h2>
-              <p className="text-gray-400 mb-6">
-                I am a web developer with 2 years of experience developing all
-                kinds of projects, using technologies such as Django, NestJS,
-                PostgreSQL, Tailwind, Angular and ReactJS, with a great passion for
-                learning every day and achieving new goals.
-              </p>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-semibold mb-4">Skills</h3>
-                <div className="flex flex-wrap gap-2">
-                  {techIcons.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="px-4 py-2 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center gap-2"
-                    >
-                      {tech.icon}
-                      <span>{tech.name}</span>
-                    </div>
-                  ))}
+          <section id="about" className="container mx-auto px-4 py-20">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <img
+                src={imagen3}
+                alt="Workspace"
+                width={800}
+                height={600}
+                className="rounded-lg"
+              />
+              <div>
+                <h2 className="text-4xl font-bold mb-6">About Me</h2>
+                <p className="text-gray-400 mb-6">
+                  I am a web developer with 2 years of experience developing all
+                  kinds of projects, using technologies such as Django, NestJS,
+                  PostgreSQL, Tailwind, Angular and ReactJS, with a great
+                  passion for learning every day and achieving new goals.
+                </p>
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold mb-4">Skills</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {techIcons.map((tech) => (
+                      <div
+                        key={tech.name}
+                        className="px-4 py-2 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center gap-2"
+                      >
+                        {tech.icon}
+                        <span>{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         </AnimatedSection>
 
         {/* Skills Section */}
         <AnimatedSection>
-        <section id="skills" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center">
-            What I Can Do
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className="bg-gray-900 border border-gray-800 rounded-lg p-6 flex items-center gap-4"
-              >
-                <Briefcase className="w-6 h-6 text-emerald-400" />
-                <span className="text-lg">{skill}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+          <section id="skills" className="container mx-auto px-4 py-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              What I Can Do
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-900 border border-gray-800 rounded-lg p-6 flex items-center gap-4"
+                >
+                  <Briefcase className="w-6 h-6 text-emerald-400" />
+                  <span className="text-lg">{skill}</span>
+                </div>
+              ))}
+            </div>
+          </section>
         </AnimatedSection>
 
         {/* Education Section */}
@@ -357,29 +354,30 @@ export default function Component() {
           </section>
         </AnimatedSection>
 
-                {/* Projects Section */}
-                <AnimatedSection >
-        <section id="projects" className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl font-bold mb-12 text-center">My Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, key) => (
-              <ProjectCard
-                key={key}
-                project={project}
-                setHoveredProject={setHoveredProject}
-                setSelectedProject={setSelectedProject}
-                setIsModalOpen={setIsModalOpen}
-                index={key}
-              />
-            ))}
-          </div>
-        </section>
+        {/* Projects Section */}
+        <AnimatedSection>
+          <section id="projects" className="container mx-auto px-4 py-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              My Projects
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, key) => (
+                <ProjectCard
+                  key={key}
+                  project={project}
+                  setHoveredProject={setHoveredProject}
+                  setSelectedProject={setSelectedProject}
+                  setIsModalOpen={setIsModalOpen}
+                  index={key}
+                />
+              ))}
+            </div>
+          </section>
         </AnimatedSection>
-
 
         {/* Contact Section */}
         <AnimatedSection>
-         <EmailForm/>
+          <EmailForm />
         </AnimatedSection>
       </main>
 
@@ -389,7 +387,10 @@ export default function Component() {
             <Globe className="w-6 h-6 text-emerald-400" />
             <span>Web Developer Portfolio</span>
           </a>
-          <p className="text-gray-400 flex gap-2"><Copyright className="pl-1 "/>All rights reserved.</p>
+          <p className="text-gray-400 flex gap-2">
+            <Copyright className="pl-1 " />
+            All rights reserved.
+          </p>
         </div>
       </footer>
 
@@ -424,15 +425,16 @@ export default function Component() {
                 </div>
                 <div className="grid gap-4 mb-4 ">
                   <div className="grid grid-cols-3 gap-4">
-                    {selectedProject?.additionalImages.map((img:string, i:number) => (
-                      <img
-                        key={i}
-                        src={img}
-                        alt={`${selectedProject.title} screenshot ${i + 1}`}
-                       
-                        className="w-auto h-[5rem] sm:h-36 object-fill rounded-md border border-gray-700"
-                      />
-                    ))}
+                    {selectedProject?.additionalImages.map(
+                      (img: string, i: number) => (
+                        <img
+                          key={i}
+                          src={img}
+                          alt={`${selectedProject.title} screenshot ${i + 1}`}
+                          className="w-auto h-[5rem] sm:h-36 object-fill rounded-md border border-gray-700"
+                        />
+                      )
+                    )}
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold mb-2 text-emerald-300">
@@ -453,7 +455,7 @@ export default function Component() {
                     <h4 className="text-lg font-semibold mb-2 text-emerald-300">
                       Description
                     </h4>
-                    <p className="text-gray-300 leading-5" >
+                    <p className="text-gray-300 leading-5">
                       {selectedProject.fullDescription}
                     </p>
                   </div>
