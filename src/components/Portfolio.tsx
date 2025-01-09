@@ -15,7 +15,7 @@ import Navigation from "./header.tsx";
 import EmailForm from "./EmailForm";
 import { Copyright } from "lucide-react";
 import imagen3 from "/internetPc.webp";
-import gif3 from "/animacion3.gif";
+import gif3 from "/animacion3.webp";
 import imagen4 from "/Screenshot65.png";
 import imagen5 from "/Screenshot77.png";
 import imagen7 from "/Screenshot81.png";
