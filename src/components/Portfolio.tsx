@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
+import Satelite from "./satelite.tsx";
 import {
   SiReact,
   SiDjango,
@@ -15,7 +16,7 @@ import Navigation from "./header.tsx";
 import EmailForm from "./EmailForm";
 import { Copyright } from "lucide-react";
 import imagen3 from "/internetPc.webp";
-import gif3 from "/animacion3.webp";
+
 import imagen4 from "/Screenshot65.png";
 import imagen5 from "/Screenshot77.png";
 import imagen7 from "/Screenshot81.png";
@@ -242,15 +243,7 @@ export default function Component() {
             </div>
           </div>
 
-          <div className=" h-[470px] mb-24 absolute right-10 overflow-hidden">
-            <img
-              src={gif3}
-              alt="Developer illustration"
-              width={500}
-              height={500}
-              className="hidden lg:block object-fill"
-            />
-          </div>
+          <Satelite />
         </section>
 
         {/* About Section */}
@@ -369,11 +362,13 @@ export default function Component() {
                   setSelectedProject={setSelectedProject}
                   setIsModalOpen={setIsModalOpen}
                   index={key}
+                  
                 />
               ))}
             </div>
           </section>
         </AnimatedSection>
+
 
         {/* Contact Section */}
         <AnimatedSection>

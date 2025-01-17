@@ -69,7 +69,7 @@ const EmailForm = () => {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://wa.me/+5358683048"
+                  href="https://wa.me/5358683048"
                   className="text-gray-400 hover:text-emerald-400"
                 >
                   <SiWhatsapp className="w-6 h-6" />
