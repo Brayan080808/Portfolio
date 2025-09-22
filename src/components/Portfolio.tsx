@@ -26,20 +26,34 @@ import imagen12 from "/Screenshot92.png";
 import imagen13 from "/Screenshot.webp";
 import imagen14 from "/Screenshot95.png";
 import imagen15 from "/Screenshot96.png";
+
+import olo1 from "/olo1.png";
+import olo2 from "/olo2.png";
+import olo3 from "/olo3.png";
+
+import reserva1 from "/reserva1.png";
+import reserva2 from "/reserva2.png";
+import reserva3 from "/reserva3.png";
+
+
+import backoffice1 from "/backoffice1.png";
+import backoffice2 from "/backoffice2.png";
+import backoffice3 from "/backoffice3.png";
+
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 import DownloadPDFButton from "./DownloadPDFButton.tsx";
 import emailjs from "@emailjs/browser";
 
-interface Project {
+export interface Project {
   title: string;
   description: string;
   image: string;
   additionalImages: string[];
   fullDescription: string;
   category: string;
-  link: string;
-  github: string;
+  link: string | null;
+  github: string | null;
   technologies: string[]; // Cambiado a un array de cadenas
 }
 
@@ -165,6 +179,59 @@ export default function Component() {
       github: "https://github.com/Brayan080808/Portfolio.git",
       technologies: ["React.js", "Tailwind CSS", "Sanity.io", "Framer Motion"],
     },
+    {
+      title: "Restaurant Backoffice Dashboard",
+      description:
+        "A management platform for restaurants and multiple sales channels, including advanced reporting tools.",
+      fullDescription:
+        "This backoffice dashboard is designed for restaurant management, allowing administrators to oversee operations across various platforms such as delivery apps, in-house sales, and reservations. The system provides tools for inventory control, staff management, and order tracking. It features comprehensive reporting and analytics, enabling users to generate sales, performance, and financial reports for informed decision-making. The dashboard is built for scalability and ease of use, streamlining workflows and improving operational efficiency.",
+      image: `${backoffice1}`,
+      additionalImages: [`${backoffice1}`, `${backoffice2}`, `${backoffice3}`],
+      category: "web",
+      link: "https://office.juvomos.com",
+      github: "",
+      technologies: ["Angular", "PrimeNG", "Redux"],
+    },
+    {
+      title: "Online Restaurant Sales System",
+      description:
+        "Comprehensive online sales platform for restaurants, featuring location integration, admin panel, payment gateway, and product...",
+      fullDescription:
+        "This system is designed to optimize online sales for restaurants, offering a robust platform that integrates real-time location services for efficient delivery management. The admin panel allows restaurant owners to manage orders, products, and user preferences with ease. Customers can personalize their orders, select ingredients, and customize products to their liking. The platform includes a secure payment gateway for seamless transactions and supports multiple sales channels. Its flexible architecture ensures scalability and adaptability for different restaurant needs.",
+      image: `${olo1}`,
+      additionalImages: [`${olo1}`, `${olo2}`, `${olo3}`],
+      category: "web",
+      link: "https://olo.juvomos.com",
+      github: null,
+      technologies: [
+        "Angular",
+        "Redux",
+        "Google Maps API",
+        "Stripe",
+        "Ionic",
+      ],
+    },
+    {
+      title: "Business Market Dashboard",
+      description:
+        "A dashboard for companies to visualize market price trends, manage transactions, receive AI-driven business insights, and optimize internal...",
+      fullDescription:
+        "This dashboard empowers businesses to monitor market price behavior through interactive charts and analytics, enabling informed decision-making. Integrated with Stripe, it allows secure registration and management of financial transactions. The platform leverages AI to provide actionable recommendations for business improvement, helping companies identify opportunities and optimize strategies. Additionally, it offers tools for managing internal processes and deals, streamlining operations and enhancing overall efficiency.",
+      image: `${reserva1}`,
+      additionalImages: [`${reserva1}`, `${reserva2}`, `${reserva3}`],
+      category: "web",
+      link: "http://react.produceerp.com/",
+      github: null,
+      technologies: [
+        "React",
+        "Django Rest Framework",
+        "Stripe",
+        "PostgreSQL",
+        "Material UI",
+        "OpenAI API",
+        "Chart.js",
+      ],
+    },
   ];
 
   const techIcons = [
@@ -173,7 +240,7 @@ export default function Component() {
     { name: "React.js", icon: <SiReact className="w-6 h-6" /> },
     { name: "Nest.js", icon: <SiNestjs className="w-6 h-6" /> },
     { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
-    { name: "PostreSQL", icon: <SiPostgresql className="w-6 h-6" /> },
+    { name: "PostgreSQL", icon: <SiPostgresql className="w-6 h-6" /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="w-6 h-6" /> },
     { name: "Git&Github", icon: <SiGit className="w-6 h-6" /> },
   ];
@@ -260,7 +327,7 @@ export default function Component() {
               <div>
                 <h2 className="text-4xl font-bold mb-6">About Me</h2>
                 <p className="text-gray-400 mb-6">
-                  I am a web developer with 2 years of experience developing all
+                  I am a web developer with 4 years of experience developing all
                   kinds of projects, using technologies such as Django, NestJS,
                   PostgreSQL, Tailwind, Angular and ReactJS, with a great
                   passion for learning every day and achieving new goals.
@@ -280,6 +347,27 @@ export default function Component() {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+        </AnimatedSection>
+
+       {/* Projects Section */}
+        <AnimatedSection>
+          <section id="projects" className="container mx-auto px-4 py-20">
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              My Projects
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, key) => (
+                <ProjectCard
+                  key={key}
+                  project={project}
+                  setHoveredProject={setHoveredProject}
+                  setSelectedProject={setSelectedProject}
+                  setIsModalOpen={setIsModalOpen}
+                  index={key}
+                />
+              ))}
             </div>
           </section>
         </AnimatedSection>
@@ -346,29 +434,6 @@ export default function Component() {
             </div>
           </section>
         </AnimatedSection>
-
-        {/* Projects Section */}
-        <AnimatedSection>
-          <section id="projects" className="container mx-auto px-4 py-20">
-            <h2 className="text-4xl font-bold mb-12 text-center">
-              My Projects
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, key) => (
-                <ProjectCard
-                  key={key}
-                  project={project}
-                  setHoveredProject={setHoveredProject}
-                  setSelectedProject={setSelectedProject}
-                  setIsModalOpen={setIsModalOpen}
-                  index={key}
-                  
-                />
-              ))}
-            </div>
-          </section>
-        </AnimatedSection>
-
 
         {/* Contact Section */}
         <AnimatedSection>
@@ -456,7 +521,10 @@ export default function Component() {
                   </div>
                 </div>
                 <div className="flex justify-between mt-4">
+                  {
+                    !!selectedProject.link && (
                   <a
+
                     href={selectedProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -464,6 +532,11 @@ export default function Component() {
                   >
                     View Project
                   </a>
+                    )
+                  }
+
+                                    {
+                    !!selectedProject.github && (
                   <a
                     href={selectedProject.github}
                     target="_blank"
@@ -472,6 +545,10 @@ export default function Component() {
                   >
                     GitHub
                   </a>
+                    )
+                  }
+
+
                 </div>
               </div>
             </motion.div>

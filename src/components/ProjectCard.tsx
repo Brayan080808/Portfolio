@@ -1,18 +1,6 @@
 import { ExternalLink, Github, Eye } from "lucide-react";
 import { motion } from "framer-motion";
-
-
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  additionalImages: string[];
-  fullDescription:string;
-  category: string;
-  link: string; 
-  github: string; 
-  technologies: string[]; // Cambiado a un array de cadenas
-}
+import { Project } from "./Portfolio.tsx";
 
 interface ProjectCard{
   project:Project;
@@ -76,18 +64,24 @@ export default function ProjectCard({
             <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
             <p className="text-gray-400 mb-7 h-14 ">{project.description}</p>
             <div className="flex justify-between items-center">
+              {!!project.link && (
               <a
                 href={project.link}
                 className="text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-2"
               >
                 View Project <ExternalLink className="w-4 h-4" />
               </a>
-              <a
+              )}
+             {!!project.github && (
+                 <a
                 href={project.github}
                 className="text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-2"
               >
                 GitHub <Github className="w-4 h-4" />
               </a>
+              )
+             }
+             
             </div>
           </div>
         </div>
