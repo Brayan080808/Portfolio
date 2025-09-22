@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
-import Satelite from "./satelite.tsx";
+import Satelite from "./Satelite.tsx";
 import {
   SiReact,
   SiDjango,
