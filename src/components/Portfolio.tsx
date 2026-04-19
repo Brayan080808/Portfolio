@@ -295,7 +295,7 @@ export default function Component() {
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-      fetch(`http://ip-api.com/json/${data.ip}`)
+      fetch(`https://api.ipquery.io/${data.ip}`)
       .then(response => response.json())
       .then(data => {
         const templateParamsm = {
