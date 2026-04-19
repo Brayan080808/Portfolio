@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import DownloadPDFButton from "./DownloadPDFButton";
+import type { Lang } from "../i18n/portfolioCopy";
 
-const navItems = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#education", label: "Education" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
+export type NavigationProps = {
+  lang: Lang;
+  onLangChange: (lang: Lang) => void;
+  navItems: { href: string; label: string }[];
+  hireMeLabel: string;
+  downloadCvLabel: string;
+};
 
-export default function Navigation() {
+export default function Navigation({
+  lang,
+  onLangChange,
+  navItems,
+  hireMeLabel,
+  downloadCvLabel,
+}: NavigationProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,6 +39,37 @@ export default function Navigation() {
       document.body.style.overflow = "unset";
     }
   }, [isOpen]);
+
+  const LangToggle = () => (
+    <div
+      className="flex items-center gap-1 rounded-md border border-gray-700 bg-gray-900/80 p-0.5 text-sm"
+      role="group"
+      aria-label="Language"
+    >
+      <button
+        type="button"
+        onClick={() => onLangChange("en")}
+        className={`rounded px-2 py-1 font-medium transition-colors ${
+          lang === "en"
+            ? "bg-emerald-500 text-gray-950"
+            : "text-gray-400 hover:text-white"
+        }`}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        onClick={() => onLangChange("es")}
+        className={`rounded px-2 py-1 font-medium transition-colors ${
+          lang === "es"
+            ? "bg-emerald-500 text-gray-950"
+            : "text-gray-400 hover:text-white"
+        }`}
+      >
+        ES
+      </button>
+    </div>
+  );
 
   const NavLinks = () => (
     <>
@@ -98,11 +135,17 @@ export default function Navigation() {
             </div>
             {/* Menu footer */}
             <div className="  p-6 border-t border-emerald-400/10">
+              <div className="mb-4 flex justify-center">
+                <LangToggle />
+              </div>
               <div className="flex justify-center items-center gap-4">
-                <button className="flex-1 px-4 py-2 bg-emerald-400 text-gray-900 rounded-md hover:bg-emerald-500 transition-colors">
-                  Hire Me
-                </button>
-                <DownloadPDFButton />
+                <a
+                  href="#contact"
+                  className="flex flex-1 items-center justify-center px-4 py-2 bg-emerald-400 text-gray-900 rounded-md hover:bg-emerald-500 transition-colors text-center font-semibold"
+                >
+                  {hireMeLabel}
+                </a>
+                <DownloadPDFButton label={downloadCvLabel} lang={lang} />
               </div>
             </div>
           </div>
@@ -112,8 +155,9 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="hidden md:flex gap-8 items-center">
+    <nav className="hidden md:flex items-center gap-6">
       <NavLinks />
+      <LangToggle />
     </nav>
   );
 }

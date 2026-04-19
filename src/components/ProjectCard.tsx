@@ -66,6 +66,7 @@ export default function ProjectCard({
             <div className="flex justify-between items-center">
               {!!project.link && (
               <a
+                target="_blank"
                 href={project.link}
                 className="text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-2"
               >

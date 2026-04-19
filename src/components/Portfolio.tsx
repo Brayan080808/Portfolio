@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useState, useRef, useEffect, useMemo, ReactNode } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Globe, X, GraduationCap, Briefcase } from "lucide-react";
 import Satelite from "./Satelite.tsx";
@@ -11,6 +11,8 @@ import {
   SiGit,
   SiTailwindcss,
   SiAngular,
+  SiJest,
+  SiOdoo,
 } from "react-icons/si";
 import Navigation from "./header.tsx";
 import EmailForm from "./EmailForm";
@@ -35,17 +37,22 @@ import reserva1 from "/reserva1.png";
 import reserva2 from "/reserva2.png";
 import reserva3 from "/reserva3.png";
 
-
 import backoffice1 from "/backoffice1.png";
 import backoffice2 from "/backoffice2.png";
 import backoffice3 from "/backoffice3.png";
 
+import emailjs from "@emailjs/browser";
+
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 import DownloadPDFButton from "./DownloadPDFButton.tsx";
-import WorkExperienceTimeline, {
-  type ExperienceItem,
-} from "./WorkExperienceTimeline";
+import WorkExperienceTimeline from "./WorkExperienceTimeline";
+import {
+  portfolioCopy,
+  workExperienceByLang,
+  getInitialLangFromBrowser,
+  type Lang,
+} from "../i18n/portfolioCopy";
 
 export interface Project {
   title: string;
@@ -58,6 +65,150 @@ export interface Project {
   github: string | null;
   technologies: string[]; // Cambiado a un array de cadenas
 }
+
+type BilingualText = Record<Lang, string>;
+
+type ProjectI18n = Omit<Project, "title" | "description" | "fullDescription"> & {
+  title: BilingualText;
+  description: BilingualText;
+  fullDescription: BilingualText;
+};
+
+const PROJECTS_I18N: ProjectI18n[] = [
+  {
+    title: {
+      en: "Restaurant backoffice",
+      es: "Backoffice para restaurantes",
+    },
+    description: {
+      en: "Admin platform for restaurants and multi-channel sales with rich reporting.",
+      es: "Plataforma de administración para restaurantes y ventas multicanal con informes.",
+    },
+    fullDescription: {
+      en: "Backoffice to streamline restaurant operations across delivery, in-house sales, and reservations: inventory, staff, orders, and analytics for better decisions.",
+      es: "Backoffice para operaciones de restaurantes en delivery, venta local y reservas: inventario, personal, pedidos y analíticas para decidir con datos.",
+    },
+    image: `${backoffice1}`,
+    additionalImages: [`${backoffice1}`, `${backoffice2}`, `${backoffice3}`],
+    category: "web",
+    link: "https://office.juvomos.com",
+    github: "",
+    technologies: ["Angular", "PrimeNG", "Redux", "TypeScript"],
+  },
+  {
+    title: {
+      en: "Online restaurant sales",
+      es: "Ventas en línea para restaurantes",
+    },
+    description: {
+      en: "Online ordering with maps, admin, payments, and product customization.",
+      es: "Pedidos en línea con mapas, administración, pagos y personalización de productos.",
+    },
+    fullDescription: {
+      en: "Platform for restaurant online sales: live location for delivery, admin for orders and catalog, secure payments (Stripe), and multi-channel reach—including hybrid mobile with Ionic.",
+      es: "Plataforma de ventas en línea para restaurantes: ubicación en vivo para reparto, administración de pedidos y catálogo, pagos seguros (Stripe) y multicanal, con app híbrida en Ionic.",
+    },
+    image: `${olo1}`,
+    additionalImages: [`${olo1}`, `${olo2}`, `${olo3}`],
+    category: "web",
+    link: "https://olo.juvomos.com",
+    github: null,
+    technologies: [
+      "Angular",
+      "Redux",
+      "Google Maps API",
+      "Stripe",
+      "Ionic",
+    ],
+  },
+  {
+    title: {
+      en: "Business market dashboard",
+      es: "Tablero de mercado empresarial",
+    },
+    description: {
+      en: "Market analytics, Stripe flows, and AI-assisted insights for operators.",
+      es: "Analíticas de mercado, pagos con Stripe e insights asistidos por IA.",
+    },
+    fullDescription: {
+      en: "Dashboard to monitor price trends, manage Stripe-backed transactions, and surface AI recommendations—plus tools for internal deals and operations.",
+      es: "Tablero para seguir tendencias de precios, operar flujos con Stripe y obtener recomendaciones con IA, además de gestionar acuerdos y procesos internos.",
+    },
+    image: `${reserva1}`,
+    additionalImages: [`${reserva1}`, `${reserva2}`, `${reserva3}`],
+    category: "web",
+    link: "https://reservaerp.com/",
+    github: null,
+    technologies: [
+      "React",
+      "Django REST Framework",
+      "Stripe",
+      "PostgreSQL",
+      "Material UI",
+      "OpenAI API",
+      "Chart.js",
+    ],
+  },
+  {
+    title: { en: "FreshShop", es: "FreshShop" },
+    description: {
+      en: "E‑commerce for food sales with cart, checkout, payments, and admin tools.",
+      es: "E‑commerce de alimentos con carrito, pago, administración y más.",
+    },
+    fullDescription: {
+      en: "E‑commerce platform for food sales: product browsing, authentication, admin panel, payment gateways, shopping cart, checkout, and search. Code on GitHub; deployment live on Render.",
+      es: "Plataforma de comercio electrónico para venta de alimentos: catálogo, autenticación, panel de administración, pasarelas de pago, carrito, compras y búsqueda. Código en GitHub; despliegue activo en Render.",
+    },
+    image: `${imagen8}`,
+    additionalImages: [`${imagen8}`, `${imagen10}`, `${imagen12}`],
+    category: "web",
+    link: "https://freshshopclient.onrender.com/",
+    github:
+      "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
+    technologies: [
+      "React",
+      "Django",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "REST API",
+      "Git & GitHub",
+    ],
+  },
+  {
+    title: { en: "FinanceFlow", es: "FinanceFlow" },
+    description: {
+      en: "Dashboard to manage and track business finances and analytics.",
+      es: "Tablero para gestionar y analizar las finanzas de un negocio.",
+    },
+    fullDescription: {
+      en: "Financial dashboard with authentication, charts, statistics, time-based analytics, and guidance for better money management.",
+      es: "Tablero financiero con autenticación, gráficos, estadísticas, análisis temporal y recomendaciones para una mejor gestión económica.",
+    },
+    image: `${imagen5}`,
+    additionalImages: [`${imagen5}`, `${imagen4}`, `${imagen7}`],
+    category: "mobile",
+    link: "https://financeflow.aam.cu/",
+    github: "https://github.com/Brayan080808/FinanceFlow",
+    technologies: ["React", "PostgreSQL", "Tailwind CSS", "NestJS", "Node.js"],
+  },
+  {
+    title: { en: "Portfolio website", es: "Sitio portafolio" },
+    description: {
+      en: "Personal portfolio with projects, experience, and contact.",
+      es: "Portafolio personal con proyectos, experiencia y contacto.",
+    },
+    fullDescription: {
+      en: "Responsive portfolio with project showcases, bilingual UI, smooth motion, and a contact form—focused on performance and UX.",
+      es: "Portafolio responsivo con proyectos, interfaz bilingüe, animaciones fluidas y formulario de contacto, pensado en rendimiento y UX.",
+    },
+    image: `${imagen13}`,
+    additionalImages: [`${imagen13}`, `${imagen14}`, `${imagen15}`],
+    category: "web",
+    link: "https://portfolio-ab6j.onrender.com/",
+    github: "https://github.com/Brayan080808/Portfolio.git",
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
+  },
+];
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -115,196 +266,86 @@ export default function Component() {
   const [, setHoveredProject] = useState<number>();
   const [selectedProject, setSelectedProject] = useState<Project>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [lang, setLang] = useState<Lang>(() => getInitialLangFromBrowser());
+
+  const t = portfolioCopy[lang];
+
+  const projects = useMemo(
+    () =>
+      PROJECTS_I18N.map((p) => ({
+        title: p.title[lang],
+        description: p.description[lang],
+        fullDescription: p.fullDescription[lang],
+        image: p.image,
+        additionalImages: p.additionalImages,
+        category: p.category,
+        link: p.link,
+        github: p.github,
+        technologies: p.technologies,
+      })),
+    [lang]
+  );
+
+  const workExperience = workExperienceByLang[lang];
 
   useEffect(() => {
     fetch("https://financeflowbackend.aam.cu/");
-    fetch("https://freshshop-dz9w.onrender.com/");
-
-    // const templateParams = {
-    //   to_email: "",
-    //   subject: "New visitor",
-    //   message: "Someone has visited your portfolio",
-    // };
-    // emailjs.send(
-    //   "service_9qmfrib",
-    //   "template_bdfwlzd",
-    //   templateParams,
-    //   "Hqsub6P4NuqvTjep2"
-    // );
+    fetch("https://freshshopclient.onrender.com/");
 
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
-    .then(data => console.log("La IP es:", data.ip));
+    .then(data => {
+      fetch(`http://ip-api.com/json/${data.ip}`)
+      .then(response => response.json())
+      .then(data => {
+        const templateParamsm = {
+          to_email: "",
+          subject: "New visitor",
+          message: "Someone has visited your portfolio",
+        };
 
+        emailjs.send(
+          "service_9qmfrib",
+          "template_bdfwlzd",
+          {
+            ...templateParamsm,
+            message: templateParamsm.message +  JSON.stringify(data)
+          },
+          "Hqsub6P4NuqvTjep2"
+        );
+      });
+    });
+// 8.8.8.8
     
   }, []);
 
-  const projects = [
-    {
-      title: "Freshshop",
-      description:
-        "A full-featured online shopping platform with cart and checkout functionality among others.",
-      fullDescription:
-        "This e-commerce platform provides a seamless shopping experience for users. It includes features such as product browsing, search functionality, user accounts, shopping cart management, and secure checkout process. The platform is designed to be scalable and can handle a large number of products and concurrent users.",
-      image: `${imagen8}`,
-      additionalImages: [`${imagen8}`, `${imagen10}`, `${imagen12}`],
-      category: "web",
-      link: "https://freshshop-dfwn.onrender.com",
-      github:
-        "https://github.com/Brayan080808/Full-Stack-Econmerce-Django-React.git",
-      technologies: [
-        "React",
-        "Node.js",
-        "PostgreSQL",
-        "Django",
-        "Tailwindcss",
-        "REST API",
-      ],
-    },
-    {
-      title: "FinanceFlow",
-      description:
-        "This project involved the development of a dashboard designed to manage and track finances for businesses.",
-      fullDescription:
-        "This project involved the development of a dashboard designed to manage and track finances for businesses. It features a user authentication system, graphical models for visualizing information from various perspectives, options for statistical analysis, time-based analytics, and tips for better economic management.",
-      image: `${imagen5}`,
-      additionalImages: [`${imagen5}`, `${imagen4}`, `${imagen7}`],
-      category: "mobile",
-      link: "https://financeflow.aam.cu/",
-      github: "https://github.com/Brayan080808/FinanceFlow",
-      technologies: ["React", "PostgreSQL", "Tailwindcss", "Nestjs", "Nodejs"],
-    },
-    {
-      title: "Portfolio Website",
-      description:
-        "This portfolio website showcases the work of a full stack developer in a sleek and modern design.",
-      fullDescription:
-        "This portfolio website showcases the work of a full stack developer in a sleek and modern design. It features a responsive layout, project showcases with live demos, and a contact form for inquiries. Built with React and Node.js, the site emphasizes performance and user experience, ensuring fast load times and smooth navigation. Each project highlights technologies used and challenges overcome, reflecting the developer's skills and passion for innovative solutions.",
-      image: `${imagen13}`,
-      additionalImages: [`${imagen13}`, `${imagen14}`, `${imagen15}`],
-      category: "web",
-      link: "#",
-      github: "https://github.com/Brayan080808/Portfolio.git",
-      technologies: ["React.js", "Tailwind CSS", "Sanity.io", "Framer Motion"],
-    },
-    {
-      title: "Restaurant Backoffice Dashboard",
-      description:
-        "A management platform for restaurants and multiple sales channels, including advanced reporting tools.",
-      fullDescription:
-        "This backoffice dashboard is designed for restaurant management, allowing administrators to oversee operations across various platforms such as delivery apps, in-house sales, and reservations. The system provides tools for inventory control, staff management, and order tracking. It features comprehensive reporting and analytics, enabling users to generate sales, performance, and financial reports for informed decision-making. The dashboard is built for scalability and ease of use, streamlining workflows and improving operational efficiency.",
-      image: `${backoffice1}`,
-      additionalImages: [`${backoffice1}`, `${backoffice2}`, `${backoffice3}`],
-      category: "web",
-      link: "https://office.juvomos.com",
-      github: "",
-      technologies: ["Angular", "PrimeNG", "Redux"],
-    },
-    {
-      title: "Online Restaurant Sales System",
-      description:
-        "Comprehensive online sales platform for restaurants, featuring location integration, admin panel, payment gateway, and product...",
-      fullDescription:
-        "This system is designed to optimize online sales for restaurants, offering a robust platform that integrates real-time location services for efficient delivery management. The admin panel allows restaurant owners to manage orders, products, and user preferences with ease. Customers can personalize their orders, select ingredients, and customize products to their liking. The platform includes a secure payment gateway for seamless transactions and supports multiple sales channels. Its flexible architecture ensures scalability and adaptability for different restaurant needs.",
-      image: `${olo1}`,
-      additionalImages: [`${olo1}`, `${olo2}`, `${olo3}`],
-      category: "web",
-      link: "https://olo.juvomos.com",
-      github: null,
-      technologies: [
-        "Angular",
-        "Redux",
-        "Google Maps API",
-        "Stripe",
-        "Ionic",
-      ],
-    },
-    {
-      title: "Business Market Dashboard",
-      description:
-        "A dashboard for companies to visualize market price trends, manage transactions, receive AI-driven business insights, and optimize internal...",
-      fullDescription:
-        "This dashboard empowers businesses to monitor market price behavior through interactive charts and analytics, enabling informed decision-making. Integrated with Stripe, it allows secure registration and management of financial transactions. The platform leverages AI to provide actionable recommendations for business improvement, helping companies identify opportunities and optimize strategies. Additionally, it offers tools for managing internal processes and deals, streamlining operations and enhancing overall efficiency.",
-      image: `${reserva1}`,
-      additionalImages: [`${reserva1}`, `${reserva2}`, `${reserva3}`],
-      category: "web",
-      link: "http://react.produceerp.com/",
-      github: null,
-      technologies: [
-        "React",
-        "Django Rest Framework",
-        "Stripe",
-        "PostgreSQL",
-        "Material UI",
-        "OpenAI API",
-        "Chart.js",
-      ],
-    },
-  ];
-
   const techIcons = [
-    { name: "Django", icon: <SiDjango className="w-6 h-6" /> },
+    { name: "React", icon: <SiReact className="w-6 h-6" /> },
     { name: "Angular", icon: <SiAngular className="w-6 h-6" /> },
-    { name: "React.js", icon: <SiReact className="w-6 h-6" /> },
-    { name: "Nest.js", icon: <SiNestjs className="w-6 h-6" /> },
-    { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
+    { name: "Django", icon: <SiDjango className="w-6 h-6" /> },
+    { name: "NestJS", icon: <SiNestjs className="w-6 h-6" /> },
     { name: "PostgreSQL", icon: <SiPostgresql className="w-6 h-6" /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss className="w-6 h-6" /> },
-    { name: "Git&Github", icon: <SiGit className="w-6 h-6" /> },
+    { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
+    { name: "Git & GitHub", icon: <SiGit className="w-6 h-6" /> },
+    { name: "Jest", icon: <SiJest className="w-6 h-6" /> },
+    { name: "Odoo", icon: <SiOdoo className="w-6 h-6" /> },
   ];
 
-  const workExperience: ExperienceItem[] = [
-    {
-      title: "Full Stack Developer",
-      company: "Juvomos",
-      companyUrl: "https://juvomos.com/",
-      location: "Remote",
-      employmentType: "Full-time",
-      startDate: "2023",
-      endDate: "Present",
-      description: [
-        "Built and maintained restaurant commerce products: online ordering, backoffice dashboards, and integrations with delivery workflows.",
-        "Delivered Angular/Ionic front ends with Redux state management and PrimeNG UI components aligned with product design.",
-        "Collaborated on reporting, inventory, and multi-channel sales features used by restaurant operators.",
-      ],
-      skills: ["Angular", "Redux", "PrimeNG", "Ionic", "TypeScript", "NestJS"],
-    },
-    {
-      title: "Full Stack Developer",
-      company: "Reserva INC",
-      companyUrl: "https://onreserva.com/",
-      location: "Remote",
-      employmentType: "Full-time",
-      startDate: "2022",
-      endDate: "2023",
-      description: [
-        "Implemented a React dashboard for market analytics, Stripe-backed flows, and AI-assisted business insights.",
-        "Worked with Django REST Framework and PostgreSQL for APIs and data modeling.",
-      ],
-      skills: ["React", "Django REST Framework", "PostgreSQL", "Stripe", 'CI/CD', 'Odoo'],
-    },
-  ];
+  const education = useMemo(
+    () => [
+      {
+        degree: t.education.degree,
+        institution: t.education.institution,
+        year: "2022 - 2026",
+        description: t.education.description,
+        logo: uci,
+      },
+    ],
+    [t.education.degree, t.education.institution, t.education.description]
+  );
 
-  const education = [
-    {
-      degree: "Computer Science Engineering",
-      institution: "University of Computer Sciences",
-      year: "2022 - 2026",
-      description:
-        "Focused on software engineering, data structures, and algorithms.",
-      logo: uci,
-    },
-  ];
-
-  const skills = [
-    "Front-end Development",
-    "Back-end Development",
-    "Database Design",
-    "API Development",
-    "UI/UX Design",
-    "Agile Methodologies",
-    "Test-Driven Development",
-  ];
+  const skills = t.softSkills;
 
   return (
     <div className="min-h-screen  bg-transparent text-white overflow-x-clip relative">
@@ -313,9 +354,17 @@ export default function Component() {
           <nav className="flex items-center justify-between">
             <a href="/" className="text-2xl font-bold flex items-center gap-2">
               <Globe className="w-8 h-8 text-emerald-400" />
-              <span>Web Developer Portfolio</span>
+              <span className="max-w-[min(100%,14rem)] text-xl leading-tight sm:max-w-none sm:text-2xl">
+                {t.brand}
+              </span>
             </a>
-            <Navigation />
+            <Navigation
+              lang={lang}
+              onLangChange={setLang}
+              navItems={t.nav}
+              hireMeLabel={t.hireMe}
+              downloadCvLabel={t.downloadCv}
+            />
           </nav>
         </div>
       </header>
@@ -327,26 +376,30 @@ export default function Component() {
         sm:flex ite  relative
         "
         >
-          <div className="max-w-2xl">
-            <h1 className=" text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
+          <div className="max-w-3xl">
+            <h1 className="text-6xl sm:text-7xl font-bold mb-8 h-48 sm:h-32  ">
               <span className="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text">
-                Hello, I&apos;m
+                {t.heroHello}
               </span>
               <br />
               <span className="h-[1.2em]  inline-block">
-                <TypewriterEffect words={["Web Developer", "Bryan"]} />
+                <TypewriterEffect
+                  key={lang}
+                  words={[...t.typewriterWords]}
+                />
               </span>
             </h1>
             <div className="h-20">
-              <p className="text-gray-400 mb-8">
-                Crafting digital experiences with modern web technologies
-              </p>
+              <p className="text-gray-400 mb-8">{t.heroSubtitle}</p>
             </div>
-            <div className="flex gap-4">
-              <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded">
-                <a href="#contact">Hire Me</a>
-              </button>
-              <DownloadPDFButton />
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded"
+              >
+                {t.hireMe}
+              </a>
+              <DownloadPDFButton label={t.downloadCv} lang={lang} />
             </div>
           </div>
 
@@ -365,15 +418,13 @@ export default function Component() {
                 className="rounded-lg"
               />
               <div>
-                <h2 className="text-4xl font-bold mb-6">About Me</h2>
-                <p className="text-gray-400 mb-6">
-                  I am a web developer with 4 years of experience developing all
-                  kinds of projects, using technologies such as Django, NestJS,
-                  PostgreSQL, Tailwind, Angular and ReactJS, with a great
-                  passion for learning every day and achieving new goals.
-                </p>
+                <h2 className="text-4xl font-bold mb-6">{t.aboutTitle}</h2>
+                <p className="text-gray-400 mb-4">{t.aboutBody}</p>
+                <p className="text-gray-500 mb-6 text-sm">{t.aboutLanguages}</p>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold mb-4">Skills</h3>
+                  <h3 className="text-2xl font-semibold mb-4">
+                    {t.aboutSkillsTitle}
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {techIcons.map((tech) => (
                       <div
@@ -394,9 +445,11 @@ export default function Component() {
         {/* Experience — línea de tiempo estilo LinkedIn */}
         <AnimatedSection>
           <section id="experience" className="container mx-auto px-4 py-20">
-            <h2 className="text-4xl font-bold mb-4 text-center">Experience</h2>
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              {t.experienceTitle}
+            </h2>
             <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12">
-              Roles and projects that shaped my work as a full stack developer.
+              {t.experienceIntro}
             </p>
             <WorkExperienceTimeline items={workExperience} />
           </section>
@@ -406,7 +459,7 @@ export default function Component() {
         <AnimatedSection>
           <section id="projects" className="container mx-auto px-4 py-20">
             <h2 className="text-4xl font-bold mb-12 text-center">
-              My Projects
+              {t.projectsTitle}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, key) => (
@@ -427,7 +480,7 @@ export default function Component() {
         <AnimatedSection>
           <section id="skills" className="container mx-auto px-4 py-20">
             <h2 className="text-4xl font-bold mb-12 text-center">
-              What I Can Do
+              {t.skillsSectionTitle}
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {skills.map((skill, index) => (
@@ -446,7 +499,9 @@ export default function Component() {
         {/* Education Section */}
         <AnimatedSection>
           <section id="education" className="container mx-auto px-4 py-20">
-            <h2 className="text-4xl font-bold mb-12 text-center">Education</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              {t.educationTitle}
+            </h2>
             <div className="max-w-4xl mx-auto">
               {education.map((edu, index) => (
                 <motion.div
@@ -488,7 +543,14 @@ export default function Component() {
 
         {/* Contact Section */}
         <AnimatedSection>
-          <EmailForm />
+          <EmailForm
+            contactCopy={t.contact}
+            contactEmail="bryanayalaacosta@gmail.com"
+            phoneDisplay="+53 58683048"
+            locationDisplay={
+              lang === "es" ? "La Habana, Cuba" : "Havana, Cuba"
+            }
+          />
         </AnimatedSection>
       </main>
 
@@ -496,11 +558,11 @@ export default function Component() {
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <a href="/" className="text-xl font-bold flex items-center gap-2">
             <Globe className="w-6 h-6 text-emerald-400" />
-            <span>Web Developer Portfolio</span>
+            <span>{t.brand}</span>
           </a>
           <p className="text-gray-400 flex gap-2">
             <Copyright className="pl-1 " />
-            All rights reserved.
+            {t.footerRights}
           </p>
         </div>
       </footer>
@@ -549,7 +611,7 @@ export default function Component() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold mb-2 text-emerald-300">
-                      Technologies Used
+                      {t.modalTech}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.technologies.map((tech) => (
@@ -564,7 +626,7 @@ export default function Component() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold mb-2 text-emerald-300">
-                      Description
+                      {t.modalDescription}
                     </h4>
                     <p className="text-gray-300 leading-5">
                       {selectedProject.fullDescription}
@@ -581,7 +643,7 @@ export default function Component() {
                     rel="noopener noreferrer"
                     className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded"
                   >
-                    View Project
+                    {t.viewProject}
                   </a>
                     )
                   }
@@ -594,7 +656,7 @@ export default function Component() {
                     rel="noopener noreferrer"
                     className="border border-emerald-500 text-emerald-500 hover:bg-emerald-500/10 font-bold py-2 px-4 rounded"
                   >
-                    GitHub
+                    {t.github}
                   </a>
                     )
                   }

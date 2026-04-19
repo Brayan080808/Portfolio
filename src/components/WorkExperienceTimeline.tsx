@@ -8,7 +8,7 @@ export interface ExperienceItem {
   location?: string;
   employmentType?: string;
   startDate: string;
-  endDate: string | "Present";
+  endDate: string;
   description: string[];
   skills?: string[];
 }
