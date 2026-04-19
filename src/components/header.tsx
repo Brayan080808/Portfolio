@@ -4,6 +4,7 @@ import DownloadPDFButton from "./DownloadPDFButton";
 
 const navItems = [
   { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
   { href: "#education", label: "Education" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },

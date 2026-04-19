@@ -43,7 +43,9 @@ import backoffice3 from "/backoffice3.png";
 import uci from "/uci.png";
 import ProjectCard from "./ProjectCard";
 import DownloadPDFButton from "./DownloadPDFButton.tsx";
-import emailjs from "@emailjs/browser";
+import WorkExperienceTimeline, {
+  type ExperienceItem,
+} from "./WorkExperienceTimeline";
 
 export interface Project {
   title: string;
@@ -118,17 +120,23 @@ export default function Component() {
     fetch("https://financeflowbackend.aam.cu/");
     fetch("https://freshshop-dz9w.onrender.com/");
 
-    const templateParams = {
-      to_email: "",
-      subject: "New visitor",
-      message: "Someone has visited your portfolio",
-    };
-    emailjs.send(
-      "service_9qmfrib",
-      "template_bdfwlzd",
-      templateParams,
-      "Hqsub6P4NuqvTjep2"
-    );
+    // const templateParams = {
+    //   to_email: "",
+    //   subject: "New visitor",
+    //   message: "Someone has visited your portfolio",
+    // };
+    // emailjs.send(
+    //   "service_9qmfrib",
+    //   "template_bdfwlzd",
+    //   templateParams,
+    //   "Hqsub6P4NuqvTjep2"
+    // );
+
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => console.log("La IP es:", data.ip));
+
+    
   }, []);
 
   const projects = [
@@ -245,6 +253,38 @@ export default function Component() {
     { name: "Git&Github", icon: <SiGit className="w-6 h-6" /> },
   ];
 
+  const workExperience: ExperienceItem[] = [
+    {
+      title: "Full Stack Developer",
+      company: "Juvomos",
+      companyUrl: "https://juvomos.com/",
+      location: "Remote",
+      employmentType: "Full-time",
+      startDate: "2023",
+      endDate: "Present",
+      description: [
+        "Built and maintained restaurant commerce products: online ordering, backoffice dashboards, and integrations with delivery workflows.",
+        "Delivered Angular/Ionic front ends with Redux state management and PrimeNG UI components aligned with product design.",
+        "Collaborated on reporting, inventory, and multi-channel sales features used by restaurant operators.",
+      ],
+      skills: ["Angular", "Redux", "PrimeNG", "Ionic", "TypeScript", "NestJS"],
+    },
+    {
+      title: "Full Stack Developer",
+      company: "Reserva INC",
+      companyUrl: "https://onreserva.com/",
+      location: "Remote",
+      employmentType: "Full-time",
+      startDate: "2022",
+      endDate: "2023",
+      description: [
+        "Implemented a React dashboard for market analytics, Stripe-backed flows, and AI-assisted business insights.",
+        "Worked with Django REST Framework and PostgreSQL for APIs and data modeling.",
+      ],
+      skills: ["React", "Django REST Framework", "PostgreSQL", "Stripe", 'CI/CD', 'Odoo'],
+    },
+  ];
+
   const education = [
     {
       degree: "Computer Science Engineering",
@@ -348,6 +388,17 @@ export default function Component() {
                 </div>
               </div>
             </div>
+          </section>
+        </AnimatedSection>
+
+        {/* Experience — línea de tiempo estilo LinkedIn */}
+        <AnimatedSection>
+          <section id="experience" className="container mx-auto px-4 py-20">
+            <h2 className="text-4xl font-bold mb-4 text-center">Experience</h2>
+            <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12">
+              Roles and projects that shaped my work as a full stack developer.
+            </p>
+            <WorkExperienceTimeline items={workExperience} />
           </section>
         </AnimatedSection>
 
